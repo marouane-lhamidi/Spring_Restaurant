@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="layout">
+	  
+	<section layout:fragment="content" id="records" class="container marginTop">
+	    <h2>Viand List</h2>
+	    <div class="stock-form form-group">
+	    <form th:action="@{save}" method="post" enctype="multipart/form-data">
+	        <label class="col-1 col-form-label">Nom :</label>
+	        <input name="nom" class="stock-form__input form-control" type="text">
+	        <label for="image" class="col-2 col-form-label">Upload Image :</label>
+	        <input type="file" name="img" id="image" class="stock-form__select form-control" style="width: 30%;" />
+	        <br />
+	        
+	        <label for="stock-form__input-stock" class="col-1 col-form-label">Fruit :</label>
+	        <select class="stock-form__select form-control " name="idFruit">
+	                <option th:each="fruit: ${fruits}"  th:value="${fruit.id}" th:text="${fruit.nom}"></option>
+	        </select>
+	        <label>Quntity :</label>
+	        <input name="quantityFruit" class="stock-form__input form-control" type="text">
+	        
+	        <label for="stock-form__input-stock" class="col-1 col-form-label">Legume :</label>
+	        <select class="stock-form__select form-control " name="idLegume">
+	                <option th:each="legume: ${legumes}" th:value="${legume.id}" th:text="${legume.nom}"></option>
+	        </select>
+	        <label>Quntity :</label>
+	        <input name="quantityLegume" class="stock-form__input form-control" type="text">
+	                    
+	         <br>
+	               
+	        <label for="stock-form__input-stock" class="col-1 col-form-label">Viand :</label>
+	        <select class="stock-form__select form-control " name="idViand">
+	                <option  th:each="viand: ${viands}" th:value="${viand.id}" th:text="${viand.nom}"></option>
+	        </select>
+	        <label>Quntity :</label>
+	        <input name="quantityViad" class="stock-form__input form-control" type="text">
+	        
+	        <button class="js-save submit btn btn-primary">Save</button>
+	     </form>
+	    </div>
+	            <div class="stocks-table m-2">
+	        <table class="table">
+	            <thead class="thead-inverse">
+	                <tr>
+	                    <th>#</th>
+	                    <th>Type</th>
+	                    <th>Name</th>
+	                    <th>Fruit</th>
+	                    <th>QuantityFruit</th>
+	                    <th>Legume</th>
+	                    <th>QuantityLegume</th>
+	                    <th>Viand</th>
+	                    <th>QuantityViand</th>
+	
+	                </tr>
+	            </thead>
+	            <tbody>
+	
+	                    <tr th:each="plat: ${plats}">
+	                        <td data-th="Id">1</td>
+	                        <td data-th="Type">Plat</td>
+	                        <td data-th="Genre" th:text="${plat.nom}"></td>
+	                    
+	                        <td th:each="fruit: ${fruits}" data-th="Quantity" th:if="${plat.idFruit} == ${fruit.id}" th:text="${fruit.nom}"></td>
+	                        <td data-th="quantity" th:text="${plat.quantityFruit}"></td>
+	                        
+	                        <td  th:each="legume: ${legumes}" data-th="Quantity" th:if="${plat.idLegume} == ${legume.id}" th:text="${legume.nom}"></td>
+	                        <td data-th="quantity" th:text="${plat.quantityLegume}"></td>
+	                        
+	                        <td  th:each="viand: ${viands}" data-th="Quantity" th:if="${plat.idViand} == ${viand.id}" th:text="${viand.nom}"></td>
+	                        <td data-th="quantity" th:text="${plat.quantityViad}"></td>
+	                        
+	                        
+	                        <td data-th="">
+	                            <a class="btn btn-danger"  onclick="return confirm('etes vous sur?')" th:href="@{delete(id=${plat.id})}">Delete</a>
+	                            /
+	                            <a class="btn btn-info"  href="#">Update</a>
+	                        </td>
+	                    </tr>
+	            </tbody>
+	        </table>
+	    </div>
+	
+	</section>
+	
+</html>

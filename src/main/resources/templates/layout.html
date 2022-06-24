@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/ListStyle.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/BareMenu.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<div class="nav-bar">
+    <div class="navigation">
+        <div class="top-menu">
+            <ul class="nav menu">
+                <li class="item-110 deeper parent">
+                    <a href="/">Home</a>
+                </li>
+                <li class="item-110 deeper parent" sec:authorize="hasRole('USER')">
+                    <a href="/menu">Menu</a>
+                </li>
+                <li class="item-110 deeper parent" sec:authorize="hasRole('ADMIN')">
+
+                    <a class="name">Stock</a>
+                    <ul class="nav-child unstyled small">
+                        <li class="item-110 deeper parent">
+                            <a href="/admin/boisson/index">Boisson</a>
+                        </li>
+                        <li class="item-110 deeper parent">
+                            <a href="/admin/fruit/index">Fruit</a>
+                        </li>
+                        <li class="item-110 deeper parent">
+                            <a href="/admin/legume/index">Legume</a>
+                        </li>
+                        <li class="item-110 deeper parent">
+                            <a href="/admin/viand/index">Viand</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="item-110 deeper parent" sec:authorize="hasRole('CHEF')">
+                    <a href="/admin/plat/index">Les Plats</a>
+                </li>
+                <li class="item-110 deeper parent" sec:authorize="hasRole('SERVEUR')">
+                    <a href="/admin/commande/index">Les Commande</a>
+                </li>
+                <li class="item-110 deeper parent" style="position:absolute;right:20px;">
+                    <a th:href="@{/logout}">LogOut</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<section layout:fragment="content">
+
+</section>
+
+</body>
+</html>

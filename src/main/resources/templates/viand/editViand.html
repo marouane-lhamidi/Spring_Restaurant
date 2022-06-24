@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="layout">
+	  
+	<section layout:fragment="content" id="records" class="container marginTop">
+	    <h2>Modify </h2>
+	    <div class="stock-form form-group">
+	    <form   th:action="@{save}" method="post">
+	            <label>Id :</label>
+	            <input name="id" th:value="${viand.id}" class="stock-form__input form-control" type="text" readonly/>
+	            <label>Nom :</label>
+	            <input name="nom" th:value="${viand.nom}" class="stock-form__input form-control" type="text" />
+	            <label>Quntity :</label>
+	            <input name="quntity" th:value="${viand.quntity}" class="stock-form__input form-control" type="text" />
+	            <label>Kg</label>
+	            <button class="js-save submit btn btn-primary"  style="width: 150px;margin-left: 10px;">Edit</button>
+	     </form>
+	    </div>
+	</section>
+
+</html>

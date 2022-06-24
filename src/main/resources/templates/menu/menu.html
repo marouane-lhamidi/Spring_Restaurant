@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="layout">
+<head>
+	<meta charset="UTF-8">
+</head>
+	  
+	<div layout:fragment="content" class="jumbotron container marginTop">
+	    <ul class="cards">
+	
+	            <li class="cards__item" th:each="plat: ${plats}">
+	                <div class="card">
+	                    <div class="card__image">
+	                        <img th:src=" @{${plat.image}}" />
+	                    </div>
+	                    <div class="card__content">
+	                        <div class="card__title" th:text="${plat.nom}"></div>
+	                        <div class="card__text">
+	                            <p>Ce Plat est Composer de :</p>
+	
+	                            
+	                            <p th:each="fruit: ${fruits}" th:if="${plat.idFruit} == ${fruit.id}" th:text="'Fruit :'+${fruit.nom}+', et Une Qauntité De '+ ${plat.quantityLegume} + 'Kg'"></p>
+	                           	<p th:each="legume: ${legumes}" th:if="${plat.idLegume} == ${legume.id}" th:text="'Legume :'+${legume.nom}+', et Une Qauntité De '+ ${plat.quantityLegume} + 'Kg'"></p>
+	                           	<p th:each="viand: ${viands}" th:if="${plat.idViand} == ${viand.id}" th:text="'Viand :'+${viand.nom}+', et Une Qauntité De' + ${plat.quantityLegume} + 'Kg'"></p>
+	                            
+	
+	                           
+	                        </div>
+	                    </div>
+	                </div>
+	            </li>		
+	    </ul>
+	</div>
+	
+</html>

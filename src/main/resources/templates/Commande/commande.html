@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="layout">
+  
+	<section layout:fragment="content" id="records" class="container marginTop">
+	     <h2>Viand List</h2>
+	     <div class="stock-form form-group">
+	     <form th:action="@{save}" method="post" enctype="multipart/form-data">
+	         
+	        	<div class="stock-form form-group">
+	             <label for="stock-form__input-stock" class="col-1 col-form-label">Plat :</label>
+	          <select class="stock-form__select form-control " name="idPlat">
+	                  <option th:each="plat: ${plats}"  th:value="${plat.id}" th:text="${plat.nom}"></option>
+	          </select>
+	          
+	             <label for="stock-form__input-stock" class="col-1 col-form-label">Boisson :</label>
+	          <select class="stock-form__select form-control " name="idBoisson">
+	                  <option th:each="boisson: ${boissons}"  th:value="${boisson.id}" th:text="${boisson.marque}"></option>
+	          </select>
+	          
+	             <label>Quntity :</label>
+	             <input name="quantityBoisson" class="stock-form__input form-control" type="text">
+	             <label>IsReady :</label>
+	             <input name="isReady" class="stock-form__input form-control" type="text" value="0" readonly>
+	             <button class="js-save submit btn btn-primary">Save</button>
+				</div>
+	     </form>
+	     </div>
+	             <div class="stocks-table m-2">
+	         <table class="table">
+	             <thead class="thead-inverse">
+	                 <tr>
+	                     <th>#</th>
+	                     <th>Type</th>
+	                     <th>NamePlat</th>
+	                     <th>NomDeBoisson</th>
+	                     <th>QuantityBoisson</th>
+	                     <th>IsReady</th>
+	                 </tr>
+	             </thead>
+	             <tbody>
+	
+	                     <tr th:each="commande: ${commandes}">
+	                         <td data-th="Id">1</td>
+	                         <td data-th="Type">Commande</td>
+	                     
+	                         <td th:each="plat: ${plats}" data-th="Quantity" th:if="${commande.idPlat} == ${plat.id}" th:text="${plat.nom}"></td>
+	                         <td th:each="boisson: ${boissons}" data-th="Quantity" th:if="${commande.idBoisson} == ${boisson.id}" th:text="${boisson.marque}"></td>
+	                         <td data-th="quantity" th:text="${commande.quantityBoisson}"></td>
+	
+	                         <td data-th="Quantity" th:if="!${commande.isReady}">
+	                         	<i class="bi bi-hourglass-split"></i>
+	                        	</td>
+	                         <td data-th="" th:if="!${commande.isReady}">
+	                             <a class="btn btn-danger" onclick="return confirm('etes vous sur?')" th:href="@{delete(id=${commande.id})}">Delete</a>
+	                        </td>
+
+	                        <td data-th="Quantity" th:if="!${commande.isReady}">
+	                             <a class="btn btn-warning"   onclick="return confirm('etes vous sur?')" th:href="@{isReady(id=${commande.id})}">IsReady</a>
+	                        </td>
+	
+	
+	                         <td data-th="Quantity"  th:if="${commande.isReady}"><i class="bi bi-check-circle"></i></td>
+	                         <td data-th=""  th:if="${commande.isReady}">
+	                             <a>Delivered</a>
+	                         </td>
+	                         <td data-th="Quantity"  th:if="${commande.isReady}">
+	                             <button class="js-save submit btn btn-success" disabled>Done</button>
+	                         </td>
+	
+	                    </tr>
+	            </tbody>
+	        </table>
+	    </div>
+	
+	</section>
+	
+</html>

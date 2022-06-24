@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="layout">
+	  
+	<section layout:fragment="content" id="records" class="container marginTop">
+	    <h2>Modify </h2>
+	    <div class="stock-form form-group">
+	    <form   th:action="@{save}" method="post">
+	        <label class="col-1 col-form-label">Nom :</label>
+	        <input name="nom" class="stock-form__input form-control" type="text" th:value="${plat.nom}">
+	        <label for="image" class="col-2 col-form-label" >Upload Image :</label>
+	        <input type="file" name="img" id="image" class="stock-form__select form-control" style="width: 30%;" />
+	        <br />
+	        
+	        <label for="stock-form__input-stock" class="col-1 col-form-label">Fruit :</label>
+	        <select class="stock-form__select form-control " name="idFruit"  th:value="${plat.idFruit}">
+	                <option  th:each="fruit: ${fruits}"  value="${fruit.id}" th:text="${fruit.nom}"></option>
+	        </select>
+	        <label>Quntity :</label>
+	        <input name="quantityFruit" class="stock-form__input form-control" type="text"  th:value="${plat.quantityFruit}">
+	        
+	        <label for="stock-form__input-stock" class="col-1 col-form-label">Legume :</label>
+	        <select class="stock-form__select form-control " name="idLegume"  th:value="${plat.idLegume}">
+	                <option th:each="legume: ${legumes}" value="${legume.id}" th:text="${legume.nom}"></option>
+	        </select>
+	        <label>Quntity :</label>
+	        <input name="quantityLegume" class="stock-form__input form-control" type="text" th:value="${plat.quantityLegume}">
+	                    
+	        <label for="stock-form__input-stock" class="col-1 col-form-label">Viand :</label>
+	        <select class="stock-form__select form-control " name="idViand" th:value="${plat.idViand}">
+	                <option  th:each="viand: ${viands}" value="${viand.id}" th:text="${viand.nom}" ></option>
+	        </select>
+	        <label>Quntity :</label>
+	        <input name="quantityViand" class="stock-form__input form-control" type="text"  th:value="${plat.quantityViand}">
+	        
+	        <button class="js-save submit btn btn-primary">Save</button>
+	     </form>
+	    </div>
+	</section>
+
+</html>
